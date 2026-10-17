@@ -6,17 +6,6 @@
 #include "math/util.h"
 #include "math/vec3.h"
 
-#define TVEC3_MATCH_COMP(v1, a, b, c)                                          \
-  ((v1).x == (a) && (v1).y == (b) && (v1).z == (c))
-
-#define TVEC3_MATCH_TVEC3(v1, v2)                                              \
-  ((v1).x == (v2).x && (v1).y == (v2).y && (v1).z == (v2).z)
-
-#define VEC3_FORMAT "(%.3f, %.3f, %.3f)"
-#define U8VEC3_FORMAT "(%d, %d, %d)"
-
-#define TVEC3_PRINT(v) (v).x, (v).y, (v).z
-
 void test_min_max(void) {
   ASSERT(MIN(0, 1) == 0);
   ASSERT(MIN(1, 1) == 1);
