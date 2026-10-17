@@ -13,9 +13,12 @@ SRC=$(wildcard src/*/*.c)
 OBJ=$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRC))
 HEADERS=$(wildcard include/*.h)
 
-.PHONY: all clean
+.PHONY: all clean test
 
 all: $(TARGET)
+
+test:
+	$(MAKE) -C tests
 
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
