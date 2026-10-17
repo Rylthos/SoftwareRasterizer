@@ -11,7 +11,7 @@ TARGET=$(LIB_DIR)/librasterizer.a
 
 SRC=$(wildcard src/*/*.c)
 OBJ=$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRC))
-HEADERS=$(wildcard include/*.h)
+HEADERS=$(wildcard */*.h)
 
 .PHONY: all clean test
 

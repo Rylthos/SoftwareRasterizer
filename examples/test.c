@@ -1,4 +1,5 @@
 #include "math/u8vec3.h"
+#include "rasterizer/triangle.h"
 #include "stdio.h"
 
 #include "rasterizer/engine.h"
@@ -8,13 +9,19 @@ int main(void) {
   Framebuffer framebuffer = framebuffer_init(640, 480);
 
   Vec3 colour1 = {.r = 1.f, .g = 0.f, .b = 0.f};
-  Vec3 colour2 = {.r = 0.f, .g = 1.f, .b = 1.f};
 
   framebuffer_clear_colour(&framebuffer, u8vec3_from_vec3(colour1));
-  framebuffer_export_to_ppm("output_1.ppm", &framebuffer);
 
-  framebuffer_clear_colour(&framebuffer, u8vec3_from_vec3(colour2));
-  framebuffer_export_to_ppm("output_2.ppm", &framebuffer);
+  Triangle t1 = create_triangle_points(0.2, 0.2, 0.4, 0.3, 0.3, 0.4);
+  framebuffer_render_triangle(&framebuffer, t1);
+
+  Triangle t2 = create_triangle_points(0.8, 0.2, 0.7, 0.4, 0.6, 0.3);
+  framebuffer_render_triangle(&framebuffer, t2);
+
+  Triangle t3 = create_triangle_points(0.22, 0.6, 0.78, 0.6, 0.5, 0.9);
+  framebuffer_render_triangle(&framebuffer, t3);
+
+  framebuffer_export_to_ppm("output_1.ppm", &framebuffer);
 
   framebuffer_free(framebuffer);
 

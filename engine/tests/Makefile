@@ -1,6 +1,6 @@
 CC = clang
 
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../include
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../include -lm
 
 BUILD_DIR=../../build
 OBJ_DIR=$(BUILD_DIR)/obj/engine/tests

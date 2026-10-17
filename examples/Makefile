@@ -1,6 +1,6 @@
 CC = clang
 
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../engine/include
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../engine/include -lm
 
 BUILD_DIR=../build
 BIN_DIR=../bin
