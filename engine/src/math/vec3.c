@@ -3,7 +3,7 @@
 #include "math.h"
 
 Vec3 vec3_new_zero(void) { return (Vec3){{0.f, 0.f, 0.f}}; }
-Vec3 vec3_new_single(float v) { return (Vec3){{v, v, v}}; }
+Vec3 vec3_new_scalar(float v) { return (Vec3){{v, v, v}}; }
 Vec3 vec3_new(float x, float y, float z) { return (Vec3){{x, y, z}}; }
 
 Vec3 vec3_add(Vec3 a, Vec3 b) {

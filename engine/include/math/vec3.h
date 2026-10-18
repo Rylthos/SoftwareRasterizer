@@ -16,7 +16,7 @@ typedef union {
 } Vec3;
 
 Vec3 vec3_new_zero(void);
-Vec3 vec3_new_single(float v);
+Vec3 vec3_new_scalar(float v);
 Vec3 vec3_new(float x, float y, float z);
 
 Vec3 vec3_add(Vec3 a, Vec3 b);

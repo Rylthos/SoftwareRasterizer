@@ -1,5 +1,6 @@
 #include "math/u8vec3.h"
 #include "rasterizer/triangle2D.h"
+#include "rasterizer/vertex2D.h"
 #include "stdio.h"
 
 #include "rasterizer/engine.h"
@@ -18,8 +19,13 @@ int main(void) {
   Triangle2D t2 = create_triangle2D_points(0.8, 0.2, 0.7, 0.4, 0.6, 0.3);
   framebuffer_render_triangle2D(&framebuffer, t2);
 
-  Triangle2D t3 = create_triangle2D_points(0.22, 0.6, 0.78, 0.6, 0.5, 0.9);
-  framebuffer_render_triangle2D(&framebuffer, t3);
+  // Triangle2D t3 = create_triangle2D_points(0.22, 0.6, 0.78, 0.6, 0.5, 0.9);
+  Triangle2D t3 = {
+      create_vertex2D(vec2_new(0.22, 0.6), vec2_new(0.f, 0.f)),
+      create_vertex2D(vec2_new(0.78, 0.6), vec2_new(1.f, 0.f)),
+      create_vertex2D(vec2_new(0.5, 0.9), vec2_new(0.f, 1.f)),
+  };
+  framebuffer_render_triangle2D_uvs(&framebuffer, t3);
 
   framebuffer_export_to_ppm("output_1.ppm", &framebuffer);
 

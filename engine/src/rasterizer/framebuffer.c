@@ -98,3 +98,31 @@ void framebuffer_render_triangle2D(const Framebuffer *fb, Triangle2D t) {
     }
   }
 }
+
+void framebuffer_render_triangle2D_uvs(const Framebuffer *fb, Triangle2D t) {
+  BoundingBox2D triangle_bounds = triangle2D_bounding_box(t);
+
+  uint32_t x_min = triangle_bounds.x.raw[0] * fb->width;
+  uint32_t x_max = triangle_bounds.x.raw[1] * fb->width;
+  uint32_t y_min = triangle_bounds.y.raw[0] * fb->height;
+  uint32_t y_max = triangle_bounds.y.raw[1] * fb->height;
+
+  const U8Vec3 colour = {{0, 255, 255}};
+
+  for (uint32_t y = y_min; y <= y_max; y++) {
+    for (uint32_t x = x_min; x <= x_max; x++) {
+      U8Vec3 *pixel = framebuffer_get_pixel(fb, x, y);
+      if (!pixel)
+        continue;
+
+      Vec2 point = {{x / (float)fb->width, y / (float)fb->height}};
+
+      if (!point_within_triangle2D(t, point))
+        continue;
+
+      Vec2 uv = triangle2D_interpolate_uv(t, point);
+
+      *pixel = u8vec3_from_vec3(vec3_new(uv.x, uv.y, 0.));
+    }
+  }
+}

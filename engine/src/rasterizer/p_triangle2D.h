@@ -14,4 +14,6 @@ BoundingBox2D triangle2D_bounding_box(Triangle2D t);
 
 bool point_within_triangle2D(Triangle2D t, Vec2 p);
 
+Vec2 triangle2D_interpolate_uv(Triangle2D t, Vec2 p);
+
 #endif

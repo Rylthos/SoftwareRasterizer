@@ -8,3 +8,6 @@ Vec2 vec2_new(float x, float y) { return (Vec2){{x, y}}; }
 Vec2 vec2_add(Vec2 a, Vec2 b) { return (Vec2){{a.x + b.x, a.y + b.y}}; }
 Vec2 vec2_sub(Vec2 a, Vec2 b) { return (Vec2){{a.x - b.x, a.y - b.y}}; }
 float vec2_dot(Vec2 a, Vec2 b) { return a.x * b.x + a.y * b.y; }
+float vec2_cross(Vec2 a, Vec2 b) { return a.x * b.y - a.y * b.x; }
+
+Vec2 vec2_scalar(Vec2 a, float t) { return (Vec2){{a.x * t, a.y * t}}; }
