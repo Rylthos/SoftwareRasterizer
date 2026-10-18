@@ -1,20 +1,23 @@
 #ifndef MATH_VEC3_H
 #define MATH_VEC3_H
 
-typedef struct {
-  union {
+typedef union {
+  struct {
     float x;
-    float r;
-  };
-  union {
     float y;
-    float g;
-  };
-  union {
     float z;
+  };
+  struct {
+    float r;
+    float g;
     float b;
   };
+  float raw[3];
 } Vec3;
+
+Vec3 vec3_new_zero(void);
+Vec3 vec3_new_single(float v);
+Vec3 vec3_new(float x, float y, float z);
 
 Vec3 vec3_add(Vec3 a, Vec3 b);
 Vec3 vec3_sub(Vec3 a, Vec3 b);

@@ -2,44 +2,40 @@
 
 #include "math.h"
 
+Vec3 vec3_new_zero(void) { return (Vec3){{0.f, 0.f, 0.f}}; }
+Vec3 vec3_new_single(float v) { return (Vec3){{v, v, v}}; }
+Vec3 vec3_new(float x, float y, float z) { return (Vec3){{x, y, z}}; }
+
 Vec3 vec3_add(Vec3 a, Vec3 b) {
-  Vec3 return_vec = {
+  return (Vec3){
       .x = a.x + b.x,
       .y = a.y + b.y,
       .z = a.z + b.z,
   };
-
-  return return_vec;
 }
 
 Vec3 vec3_sub(Vec3 a, Vec3 b) {
-  Vec3 return_vec = {
+  return (Vec3){
       .x = a.x - b.x,
       .y = a.y - b.y,
       .z = a.z - b.z,
   };
-
-  return return_vec;
 }
 
 Vec3 vec3_scalar(Vec3 a, float b) {
-  Vec3 return_vec = {
+  return (Vec3){
       .x = a.x * b,
       .y = a.y * b,
       .z = a.z * b,
   };
-
-  return return_vec;
 }
 
 Vec3 vec3_cross(Vec3 a, Vec3 b) {
-  Vec3 return_vec = {
+  return (Vec3){
       .x = a.y * b.z - a.z * b.y,
       .y = a.z * b.x - a.x * b.z,
       .z = a.x * b.y - a.y * b.x,
   };
-
-  return return_vec;
 }
 
 float vec3_dot(Vec3 a, Vec3 b) { return a.x * b.x + a.y * b.x + a.z * b.z; }

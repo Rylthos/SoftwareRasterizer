@@ -51,22 +51,22 @@ void test_u8vec3_from_vec3(void) {
 void test_vec3_add(void) {
   Vec3 vec1 = {
       .x = 0.f,
-      .y = 0.f,
-      .z = 0.f,
+      .y = 1.f,
+      .z = 2.f,
   };
   Vec3 vec2 = {
       .x = 1.f,
-      .y = 1.f,
-      .z = 1.f,
+      .y = 2.f,
+      .z = 3.f,
   };
 
   Vec3 result = vec3_add(vec1, vec2);
-  ASSERT_MSG(TVEC3_MATCH_COMP(result, 1.f, 1.f, 1.f),
+  ASSERT_MSG(TVEC3_MATCH_COMP(result, 1.f, 3.f, 5.f),
              "Expected (1., 1., 1.) got " VEC3_FORMAT "\n",
              TVEC3_PRINT(result));
 }
 
-void run_tests(void) {
+void math_tests(void) {
   test_min_max();
   test_u8vec3_from_vec3();
 }
