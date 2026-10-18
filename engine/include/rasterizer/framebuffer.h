@@ -4,7 +4,7 @@
 #include "math/u8vec3.h"
 #include <stdint.h>
 
-#include "rasterizer/triangle.h"
+#include "rasterizer/triangle2D.h"
 
 typedef struct T_Framebuffer {
   uint32_t width;
@@ -23,6 +23,7 @@ U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, uint32_t x,
 
 void framebuffer_clear_colour(const Framebuffer *framebuffer, U8Vec3 colour);
 
-void framebuffer_render_triangle(const Framebuffer *framebuffer, Triangle t);
+void framebuffer_render_triangle2D(const Framebuffer *framebuffer,
+                                   Triangle2D t);
 
 #endif
