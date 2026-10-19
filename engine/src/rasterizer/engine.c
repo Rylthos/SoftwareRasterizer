@@ -44,7 +44,7 @@ void draw_triangle(DrawCommand cmd, Triangle2D triangle) {
 }
 
 void draw(DrawCommand cmd) {
-  for (uint32_t i = 0; i < mesh_vertex_count(&cmd.mesh); i += 3) {
-    draw_triangle(cmd, mesh_get_triangle2D(&cmd.mesh, i));
+  for (uint32_t i = 0; i < mesh_triangle_count(&cmd.mesh); i++) {
+    draw_triangle(cmd, mesh_get_triangle2D(&cmd.mesh, i * 3));
   }
 }

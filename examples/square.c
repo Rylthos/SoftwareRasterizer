@@ -2,6 +2,7 @@
 
 #include "rasterizer/engine.h"
 #include "rasterizer/framebuffer.h"
+#include "rasterizer/mesh.h"
 #include "rasterizer/triangle2D.h"
 #include "rasterizer/vertex2D.h"
 
@@ -11,7 +12,7 @@ int main(void) {
   framebuffer_clear_colour(&framebuffer,
                            u8vec3_from_vec3(vec3_new_scalar(0.2f)));
 
-  Mesh mesh = create_mesh();
+  Mesh mesh = create_indexed_mesh();
   mesh_add_vertex(&mesh,
                   create_vertex2D(vec2_new(0.2, 0.2), vec2_new(0.f, 0.f)));
   mesh_add_vertex(&mesh,
@@ -19,11 +20,10 @@ int main(void) {
   mesh_add_vertex(&mesh,
                   create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)));
   mesh_add_vertex(&mesh,
-                  create_vertex2D(vec2_new(0.8, 0.2), vec2_new(1.f, 0.f)));
-  mesh_add_vertex(&mesh,
                   create_vertex2D(vec2_new(0.8, 0.8), vec2_new(1.f, 1.f)));
-  mesh_add_vertex(&mesh,
-                  create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)));
+
+  mesh_add_triangle_indices(&mesh, 0, 1, 2);
+  mesh_add_triangle_indices(&mesh, 1, 3, 2);
 
   draw((DrawCommand){
       .fb = &framebuffer, .cullMode = CullMode_None, .mesh = mesh});
