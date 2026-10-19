@@ -1,7 +1,7 @@
 CC = clang
 AR = ar
 
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -Iinclude
+CFLAGS = -std=c23 -Wall -Wextra -Wpedantic -O2 -Iinclude
 
 BUILD_DIR=../build
 OBJ_DIR=$(BUILD_DIR)/obj/engine

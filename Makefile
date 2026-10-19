@@ -1,6 +1,6 @@
 .PHONY: all engine examples clean test lsp
 
-all: engine examples
+all: engine examples test
 
 engine:
 	$(MAKE) -C engine

@@ -8,7 +8,7 @@ ENGINE_LIB=$(BUILD_DIR)/lib/librasterizer.a
 
 SRC=$(wildcard *.c)
 BIN=$(patsubst %.c,$(BIN_DIR)/%,$(SRC))
-HEADERS=$(wildcard ../engine/include/*.h)
+HEADERS=$(wildcard ../engine/include/*/*.h)
 
 .PHONY: all clean
 

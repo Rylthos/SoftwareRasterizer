@@ -1,6 +1,6 @@
 CC = clang
 
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../include -lm
+CFLAGS = -std=c23 -Wall -Wextra -Wpedantic -O2 -I../include -lm -g
 
 BUILD_DIR=../../build
 OBJ_DIR=$(BUILD_DIR)/obj/engine/tests
@@ -20,7 +20,10 @@ all: $(TARGET)
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-$(TARGET): $(OBJ)
+$(ENGINE_LIB):
+	$(MAKE) -C ../
+
+$(TARGET): $(OBJ) $(ENGINE_LIB)
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $^ $(ENGINE_LIB) -o $@
 
