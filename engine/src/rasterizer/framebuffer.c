@@ -1,4 +1,5 @@
 #include "rasterizer/framebuffer.h"
+#include "p_framebuffer.h"
 
 #include "stdio.h"
 #include "stdlib.h"

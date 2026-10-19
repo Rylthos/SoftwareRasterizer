@@ -23,10 +23,4 @@ U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, uint32_t x,
 
 void framebuffer_clear_colour(const Framebuffer *framebuffer, U8Vec3 colour);
 
-void framebuffer_render_triangle2D(const Framebuffer *framebuffer,
-                                   Triangle2D t);
-
-void framebuffer_render_triangle2D_uvs(const Framebuffer *framebuffer,
-                                       Triangle2D t);
-
 #endif

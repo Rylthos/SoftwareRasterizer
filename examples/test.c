@@ -14,18 +14,19 @@ int main(void) {
   framebuffer_clear_colour(&framebuffer, u8vec3_from_vec3(colour1));
 
   Triangle2D t1 = create_triangle2D_points(0.2, 0.2, 0.4, 0.3, 0.3, 0.4);
-  framebuffer_render_triangle2D(&framebuffer, t1);
+  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t1});
+  // framebuffer_render_triangle2D(&framebuffer, t1);
 
   Triangle2D t2 = create_triangle2D_points(0.8, 0.2, 0.7, 0.4, 0.6, 0.3);
-  framebuffer_render_triangle2D(&framebuffer, t2);
+  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t2});
 
   // Triangle2D t3 = create_triangle2D_points(0.22, 0.6, 0.78, 0.6, 0.5, 0.9);
   Triangle2D t3 = {
-      create_vertex2D(vec2_new(0.22, 0.6), vec2_new(0.f, 0.f)),
       create_vertex2D(vec2_new(0.78, 0.6), vec2_new(1.f, 0.f)),
+      create_vertex2D(vec2_new(0.22, 0.6), vec2_new(0.f, 0.f)),
       create_vertex2D(vec2_new(0.5, 0.9), vec2_new(0.f, 1.f)),
   };
-  framebuffer_render_triangle2D_uvs(&framebuffer, t3);
+  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t3});
 
   framebuffer_export_to_ppm("output_1.ppm", &framebuffer);
 
