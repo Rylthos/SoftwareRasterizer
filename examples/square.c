@@ -11,20 +11,22 @@ int main(void) {
   framebuffer_clear_colour(&framebuffer,
                            u8vec3_from_vec3(vec3_new_scalar(0.2f)));
 
-  Triangle2D t1 = {
-      create_vertex2D(vec2_new(0.2, 0.2), vec2_new(0.f, 0.f)),
-      create_vertex2D(vec2_new(0.8, 0.2), vec2_new(1.f, 0.f)),
-      create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)),
-  };
-  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t1});
-  // framebuffer_render_triangle2D_uvs(&framebuffer, t1);
+  Mesh mesh = create_mesh();
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.2, 0.2), vec2_new(0.f, 0.f)));
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.8, 0.2), vec2_new(1.f, 0.f)));
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)));
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.8, 0.2), vec2_new(1.f, 0.f)));
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.8, 0.8), vec2_new(1.f, 1.f)));
+  mesh_add_vertex(&mesh,
+                  create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)));
 
-  Triangle2D t2 = {
-      create_vertex2D(vec2_new(0.8, 0.2), vec2_new(1.f, 0.f)),
-      create_vertex2D(vec2_new(0.8, 0.8), vec2_new(1.f, 1.f)),
-      create_vertex2D(vec2_new(0.2, 0.8), vec2_new(0.f, 1.f)),
-  };
-  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t2});
+  draw((DrawCommand){
+      .fb = &framebuffer, .cullMode = CullMode_None, .mesh = mesh});
 
   framebuffer_export_to_ppm("square.ppm", &framebuffer);
 

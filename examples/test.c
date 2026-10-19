@@ -1,4 +1,6 @@
 #include "math/u8vec3.h"
+#include "math/vec2.h"
+#include "rasterizer/mesh.h"
 #include "rasterizer/triangle2D.h"
 #include "rasterizer/vertex2D.h"
 #include "stdio.h"
@@ -13,20 +15,27 @@ int main(void) {
 
   framebuffer_clear_colour(&framebuffer, u8vec3_from_vec3(colour1));
 
-  Triangle2D t1 = create_triangle2D_points(0.2, 0.2, 0.4, 0.3, 0.3, 0.4);
-  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t1});
-  // framebuffer_render_triangle2D(&framebuffer, t1);
+  Mesh eyes = create_mesh();
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.2, 0.2)));
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.4, 0.3)));
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.3, 0.4)));
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.8, 0.2)));
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.7, 0.4)));
+  mesh_add_vertex(&eyes, create_vertex2D_position(vec2_new(0.6, 0.3)));
 
-  Triangle2D t2 = create_triangle2D_points(0.8, 0.2, 0.7, 0.4, 0.6, 0.3);
-  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t2});
+  Mesh mouth = create_mesh();
+  mesh_add_vertex(&mouth,
+                  create_vertex2D(vec2_new(0.78, 0.6), vec2_new(1.f, 0.f)));
+  mesh_add_vertex(&mouth,
+                  create_vertex2D(vec2_new(0.22, 0.6), vec2_new(0.f, 0.f)));
+  mesh_add_vertex(&mouth,
+                  create_vertex2D(vec2_new(0.5, 0.9), vec2_new(0.f, 1.f)));
 
-  // Triangle2D t3 = create_triangle2D_points(0.22, 0.6, 0.78, 0.6, 0.5, 0.9);
-  Triangle2D t3 = {
-      create_vertex2D(vec2_new(0.78, 0.6), vec2_new(1.f, 0.f)),
-      create_vertex2D(vec2_new(0.22, 0.6), vec2_new(0.f, 0.f)),
-      create_vertex2D(vec2_new(0.5, 0.9), vec2_new(0.f, 1.f)),
-  };
-  draw((DrawCommand){.fb = &framebuffer, .cullMode = CullMode_None, .t = t3});
+  draw((DrawCommand){
+      .fb = &framebuffer, .cullMode = CullMode_None, .mesh = eyes});
+
+  draw((DrawCommand){
+      .fb = &framebuffer, .cullMode = CullMode_None, .mesh = mouth});
 
   framebuffer_export_to_ppm("output_1.ppm", &framebuffer);
 

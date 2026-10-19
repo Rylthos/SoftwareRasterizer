@@ -18,6 +18,8 @@ size_t array_capacity(void *array);
 
 void *array_push(void **array);
 
+#define ARRAY(T) T *
+
 #define ARRAY_CREATE(T) array_init(sizeof(T))
 #define ARRAY_FREE(A) array_free(A)
 #define ARRAY_PUSH(A, E)                                                       \
