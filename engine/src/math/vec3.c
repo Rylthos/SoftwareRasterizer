@@ -38,7 +38,7 @@ Vec3 vec3_cross(Vec3 a, Vec3 b) {
   };
 }
 
-float vec3_dot(Vec3 a, Vec3 b) { return a.x * b.x + a.y * b.x + a.z * b.z; }
+float vec3_dot(Vec3 a, Vec3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
 
 float vec3_magnitude_sq(Vec3 v) { return vec3_dot(v, v); }
 float vec3_magnitude(Vec3 v) { return sqrtf(vec3_magnitude_sq(v)); }

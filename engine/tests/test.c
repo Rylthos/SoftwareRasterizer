@@ -4,7 +4,7 @@
 
 #include "array.h"
 #include "framebuffer.h"
-#include "math.h"
+#include "math_test.h"
 
 void register_test(const char *name, test_func_t func) {
   if (test_count < MAX_TESTS) {

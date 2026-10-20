@@ -43,7 +43,7 @@ float vec4_2d_det(Vec4 a, Vec4 b) {
 }
 
 float vec4_dot(Vec4 a, Vec4 b) {
-  return a.x * b.x + a.y * b.x + a.z * b.z + a.w * b.w;
+  return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
 float vec4_magnitude_sq(Vec4 v) { return vec4_dot(v, v); }
