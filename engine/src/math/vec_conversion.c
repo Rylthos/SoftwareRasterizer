@@ -3,10 +3,14 @@
 #include "math/util.h"
 
 Vec2 vec2_from_vec3(Vec3 v) { return (Vec2){{v.x, v.y}}; }
-Vec2 vec2_from_vec4(Vec4 v) { return (Vec2){{v.x / v.w, v.y / v.w}}; }
+Vec2 vec2_from_vec4(Vec4 v) { return (Vec2){{v.x, v.y}}; }
+Vec2 vec2_from_vec4_homogenous(Vec4 v) {
+  return (Vec2){{v.x / v.w, v.y / v.w}};
+}
 
 Vec3 vec3_from_vec2(Vec2 v, float z) { return (Vec3){{v.x, v.y, z}}; }
-Vec3 vec3_from_vec4(Vec4 v) {
+Vec3 vec3_from_vec4(Vec4 v) { return (Vec3){{v.x, v.y, v.z}}; }
+Vec3 vec3_from_vec4_homogenous(Vec4 v) {
   return (Vec3){{v.x / v.w, v.y / v.w, v.z / v.w}};
 }
 

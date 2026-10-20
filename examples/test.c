@@ -1,9 +1,7 @@
 #include "math/math.h"
 
 #include "rasterizer/mesh.h"
-#include "rasterizer/triangle2D.h"
 #include "rasterizer/vertex2D.h"
-#include "stdio.h"
 
 #include "rasterizer/engine.h"
 #include "rasterizer/framebuffer.h"

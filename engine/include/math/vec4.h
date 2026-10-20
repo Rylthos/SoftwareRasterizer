@@ -25,6 +25,8 @@ Vec4 vec4_add(Vec4 a, Vec4 b);
 Vec4 vec4_sub(Vec4 a, Vec4 b);
 Vec4 vec4_scalar(Vec4 a, float b);
 
+float vec4_2d_det(Vec4 a, Vec4 b);
+
 float vec4_dot(Vec4 a, Vec4 b);
 float vec4_magnitude_sq(Vec4 v);
 float vec4_magnitude(Vec4 v);

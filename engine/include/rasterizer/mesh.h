@@ -4,6 +4,9 @@
 #include "generic/array.h"
 #include "rasterizer/triangle2D.h"
 #include "rasterizer/vertex2D.h"
+
+#include "rasterizer/shader.h"
+
 #include <stdio.h>
 
 typedef struct {

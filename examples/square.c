@@ -1,10 +1,25 @@
 #include "math/u8vec3.h"
 
+#include "math/vec_conversion.h"
 #include "rasterizer/engine.h"
 #include "rasterizer/framebuffer.h"
 #include "rasterizer/mesh.h"
-#include "rasterizer/triangle2D.h"
-#include "rasterizer/vertex2D.h"
+#include "rasterizer/shader.h"
+
+#include "math/math.h"
+#include <stdint.h>
+
+void vertex_shader(InputVertexShader input, OutputVertexShader *output) {
+  output->vertex_position = vec4_from_vec3(
+      vec3_scalar(vec3_add(input.vertex_position, vec3_new_scalar(-0.2f)),
+                  1.0 / 0.6),
+      1.f);
+  // output->vertex_position = vec4_from_vec3(input.vertex_position, 1.f);
+}
+
+void fragment_shader(InputFragmentShader input, OutputFragmentShader *output) {
+  output->colour = input.fragment_position;
+}
 
 int main(void) {
   Framebuffer framebuffer = framebuffer_init(400, 400);
@@ -26,7 +41,12 @@ int main(void) {
   mesh_add_triangle_indices(&mesh, 1, 3, 2);
 
   draw((DrawCommand){
-      .fb = &framebuffer, .cullMode = CullMode_None, .mesh = mesh});
+      .fb = &framebuffer,
+      .cullMode = CullMode_None,
+      .mesh = mesh,
+      .vertex_shader = vertex_shader,
+      .fragment_shader = fragment_shader,
+  });
 
   framebuffer_export_to_ppm("square.ppm", &framebuffer);
 

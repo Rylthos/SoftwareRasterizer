@@ -9,9 +9,9 @@ LIB_DIR=$(BUILD_DIR)/lib
 
 TARGET=$(LIB_DIR)/librasterizer.a
 
-SRC=$(wildcard src/*/*.c)
+SRC=$(shell find src -name "*.c")
 OBJ=$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRC))
-HEADERS=$(wildcard */*.h)
+HEADERS=$(shell find . -name "*.h")
 
 .PHONY: all clean test
 
@@ -26,7 +26,6 @@ clean:
 $(TARGET): $(OBJ)
 	mkdir -p $(LIB_DIR)
 	$(AR) rcs $@ $^
-
 
 $(OBJ_DIR)/%.o: src/%.c $(HEADERS)
 	mkdir -p $(dir $@)

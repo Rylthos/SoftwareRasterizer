@@ -1,6 +1,9 @@
 #include "math/vec4.h"
 
+#include "math/math.h"
+
 #include "math.h"
+#include "math/vec_conversion.h"
 
 Vec4 vec4_new_zero(void) { return (Vec4){{0.f, 0.f, 0.f, 0.f}}; }
 Vec4 vec4_new_scalar(float v) { return (Vec4){{v, v, v, v}}; }
@@ -33,6 +36,10 @@ Vec4 vec4_scalar(Vec4 a, float b) {
       .z = a.z * b,
       .w = a.w * b,
   };
+}
+
+float vec4_2d_det(Vec4 a, Vec4 b) {
+  return vec2_cross(vec2_from_vec4(a), vec2_from_vec4(b));
 }
 
 float vec4_dot(Vec4 a, Vec4 b) {
