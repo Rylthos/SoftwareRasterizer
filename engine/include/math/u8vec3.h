@@ -3,8 +3,6 @@
 
 #include "stdint.h"
 
-#include "math/vec3.h"
-
 typedef union {
   struct {
     uint8_t x;
@@ -18,7 +16,5 @@ typedef union {
   };
   uint8_t raw[3];
 } U8Vec3;
-
-U8Vec3 u8vec3_from_vec3(Vec3 c);
 
 #endif

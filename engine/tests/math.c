@@ -2,9 +2,7 @@
 
 #include "test.h"
 
-#include "math/u8vec3.h"
-#include "math/util.h"
-#include "math/vec3.h"
+#include "math/math.h"
 
 void test_min_max(void) {
   ASSERT(MIN(0, 1) == 0);

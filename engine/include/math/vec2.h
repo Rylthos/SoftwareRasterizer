@@ -1,6 +1,8 @@
 #ifndef MATH_VEC2_H
 #define MATH_VEC2_H
 
+#include "math/vec4.h"
+
 typedef union {
   struct {
     float x;

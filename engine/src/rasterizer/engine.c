@@ -6,7 +6,7 @@
 #include "rasterizer/vertex2D.h"
 #include "stdbool.h"
 
-#include "math/vec2.h"
+#include "math/math.h"
 
 void draw_triangle(DrawCommand cmd, Triangle2D triangle) {
   bool triangle_cw =

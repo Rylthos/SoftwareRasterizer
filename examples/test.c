@@ -1,5 +1,5 @@
-#include "math/u8vec3.h"
-#include "math/vec2.h"
+#include "math/math.h"
+
 #include "rasterizer/mesh.h"
 #include "rasterizer/triangle2D.h"
 #include "rasterizer/vertex2D.h"
