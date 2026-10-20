@@ -1,10 +1,7 @@
-CC = clang
+include ../config.mk
 
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -I../engine/include -lm
-
-BUILD_DIR=../build
-BIN_DIR=../bin
-ENGINE_LIB=$(BUILD_DIR)/lib/librasterizer.a
+OBJ_DIR=$(BASE_OBJ_DIR)/examples
+BIN_DIR=$(BASE_BIN_DIR)/examples
 
 SRC=$(wildcard *.c)
 BIN=$(patsubst %.c,$(BIN_DIR)/%,$(SRC))
@@ -18,7 +15,7 @@ $(ENGINE_LIB):
 	$(MAKE) -C ../engine
 
 $(BIN_DIR)/%: %.c $(ENGINE_LIB) $(HEADERS)
-	mkdir -p $(BIN_DIR)
+	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $< $(ENGINE_LIB) -o $@
 
 clean:

@@ -1,17 +1,13 @@
-CC = clang
+include ../../config.mk
 
-CFLAGS = -std=c23 -Wall -Wextra -Wpedantic -O2 -I../include -lm -g
-
-BUILD_DIR=../../build
-OBJ_DIR=$(BUILD_DIR)/obj/engine/tests
-BIN_DIR=../../bin
-ENGINE_LIB=$(BUILD_DIR)/lib/librasterizer.a
+OBJ_DIR=$(BASE_OBJ_DIR)/engine/tests
+BIN_DIR=$(BASE_BIN_DIR)/engine
 
 SRC=$(wildcard *.c)
 OBJ=$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 HEADERS=$(wildcard *.h)
 
-TARGET=$(BIN_DIR)/engine_test
+TARGET=$(BIN_DIR)/run_tests
 
 .PHONY: all clean
 
@@ -24,9 +20,9 @@ $(ENGINE_LIB):
 	$(MAKE) -C ../
 
 $(TARGET): $(OBJ) $(ENGINE_LIB)
-	mkdir -p $(BIN_DIR)
+	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $^ $(ENGINE_LIB) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS)
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
