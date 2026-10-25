@@ -26,13 +26,13 @@ void base_fragment_shader(InputFragmentShader args,
 void framebuffer_triangle(DrawCommand cmd, Triangle triangle) {
   BoundingBox2D triangle_bounds = triangle_bounding_box(triangle);
 
-  uint32_t x_min = triangle_bounds.x.raw[0] * cmd.fb->width;
-  uint32_t x_max = triangle_bounds.x.raw[1] * cmd.fb->width;
-  uint32_t y_min = triangle_bounds.y.raw[0] * cmd.fb->height;
-  uint32_t y_max = triangle_bounds.y.raw[1] * cmd.fb->height;
+  int32_t x_min = triangle_bounds.x.raw[0] * cmd.fb->width;
+  int32_t x_max = triangle_bounds.x.raw[1] * cmd.fb->width;
+  int32_t y_min = triangle_bounds.y.raw[0] * cmd.fb->height;
+  int32_t y_max = triangle_bounds.y.raw[1] * cmd.fb->height;
 
-  for (uint32_t y = y_min; y <= y_max; y++) {
-    for (uint32_t x = x_min; x <= x_max; x++) {
+  for (int32_t y = y_min; y <= y_max; y++) {
+    for (int32_t x = x_min; x <= x_max; x++) {
       U8Vec3 *pixel = framebuffer_get_pixel(cmd.fb, x, y);
       if (!pixel)
         continue;

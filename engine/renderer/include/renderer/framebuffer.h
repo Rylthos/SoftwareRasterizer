@@ -7,8 +7,8 @@
 #include "renderer/triangle2D.h"
 
 typedef struct T_Framebuffer {
-  uint32_t width;
-  uint32_t height;
+  int32_t width;
+  int32_t height;
   U8Vec3 *data;
 } Framebuffer;
 
@@ -18,8 +18,8 @@ void framebuffer_free(Framebuffer framebuffer);
 void framebuffer_export_to_ppm(const char *target,
                                const Framebuffer *framebuffer);
 
-U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, uint32_t x,
-                              uint32_t y);
+U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, int32_t x,
+                              int32_t y);
 
 void framebuffer_clear_colour(const Framebuffer *framebuffer, U8Vec3 colour);
 

@@ -44,8 +44,8 @@ void framebuffer_export_to_ppm(const char *target,
 
   ppm_write_header(file, framebuffer->width, framebuffer->height);
 
-  for (uint32_t y = 0; y < framebuffer->height; y++) {
-    for (uint32_t x = 0; x < framebuffer->width; x++) {
+  for (int32_t y = 0; y < framebuffer->height; y++) {
+    for (int32_t x = 0; x < framebuffer->width; x++) {
       U8Vec3 *pixel = framebuffer_get_pixel(framebuffer, x, y);
       int len =
           snprintf(buf, buf_length, "%d %d %d\n", pixel->r, pixel->g, pixel->b);
@@ -57,8 +57,8 @@ close_file:
   fclose(file);
 }
 
-U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, uint32_t x,
-                              uint32_t y) {
+U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, int32_t x,
+                              int32_t y) {
   if (x >= 0 && x < framebuffer->width && y >= 0 && y < framebuffer->height)
     return framebuffer->data + x + framebuffer->width * y;
 
