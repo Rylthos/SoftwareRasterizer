@@ -25,17 +25,22 @@ int main(void) {
 
   Mesh mesh = create_mesh();
   mesh_add_vertex(&mesh,
-                  create_vertex2D(vec2_new(0.1, 0.0), vec2_new(0.f, 0.f)));
+                  create_vertex2D(vec2_new(0.5, -0.5), vec2_new(0.f, 0.f)));
   mesh_add_vertex(&mesh,
-                  create_vertex2D(vec2_new(0.1, 0.1), vec2_new(1.f, 0.f)));
+                  create_vertex2D(vec2_new(0.5, 0.5), vec2_new(1.f, 0.f)));
   mesh_add_vertex(&mesh,
-                  create_vertex2D(vec2_new(0.0, 0.1), vec2_new(0.f, 1.f)));
+                  create_vertex2D(vec2_new(-0.5, 0.5), vec2_new(0.f, 1.f)));
 
   for (int x = 0; x < 10; x++) {
     for (int y = 0; y < 10; y++) {
       triangle_transform = mat4x4_identity();
+      triangle_transform =
+          mat4x4_rotate_z(triangle_transform, (x + y * 10) / 100.f * TWO_PI);
+      triangle_transform = mat4x4_scale(triangle_transform, 0.1f);
       triangle_transform = mat4x4_translate(triangle_transform,
                                             vec3_new(x / 10.f, y / 10.f, 0.f));
+      triangle_transform =
+          mat4x4_translate(triangle_transform, vec3_new(0.05f, 0.05f, 0.0f));
 
       draw((DrawCommand){
           .fb = &framebuffer,
