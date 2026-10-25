@@ -17,4 +17,6 @@ typedef union {
   uint8_t raw[3];
 } U8Vec3;
 
+U8Vec3 u8vec3_new(uint8_t r, uint8_t g, uint8_t b);
+
 #endif

@@ -20,7 +20,7 @@ else
 endif
 
 ifeq ($(OS),Linux)
-	LIBS = -lm
+	LIBS = -Wno-unused-command-line-argument -lm
 else
 	LIBS =
 endif
