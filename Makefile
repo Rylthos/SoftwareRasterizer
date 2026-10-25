@@ -1,8 +1,9 @@
 include config.mk
 
-.PHONY: all engine examples clean test lsp debug release
+# .PHONY: all engine examples clean test lsp debug release
+.PHONY: all math generic examples test clean lsp debug release
 
-all: engine examples test lsp
+all: examples
 
 debug:
 	$(MAKE) BUILD=debug all
@@ -10,20 +11,26 @@ debug:
 release:
 	$(MAKE) BUILD=release all
 
-engine:
-	$(MAKE) -C engine BUILD=$(BUILD)
+math:
+	$(MAKE) -C engine math BUILD=$(BUILD)
+
+generic:
+	$(MAKE) -C engine generic BUILD=$(BUILD)
+
+renderer:
+	$(MAKE) -C engine renderer BUILD=$(BUILD)
 
 test:
 	$(MAKE) -C engine test BUILD=$(BUILD)
 
-examples: engine
+examples:
 	$(MAKE) -C examples BUILD=$(BUILD)
 
 clean:
 	$(MAKE) -C examples clean
 	$(MAKE) -C engine clean
-	rm -rf $(BASE_BUILD_DIR)
-	rm -rf $(BASE_BIN_DIR)
+	rm -rf $(BUILD_DIR)
+	rm -rf $(BIN_DIR)
 
 lsp:
 	compiledb -n make -B

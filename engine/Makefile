@@ -1,26 +1,21 @@
-include ../config.mk
+.PHONY: all math generic renderer test clean
 
-OBJ_DIR=$(BASE_OBJ_DIR)/engine
-LIB_DIR=$(BASE_LIB_DIR)
+all: renderer
 
-SRC=$(shell find src -name "*.c")
-OBJ=$(patsubst src/%.c,$(OBJ_DIR)/%.o,$(SRC))
-HEADERS=$(shell find . -name "*.h")
+math:
+	$(MAKE) -C math
 
-.PHONY: all clean test
+generic:
+	$(MAKE) -C generic
 
-all: $(ENGINE_LIB)
+renderer: math generic
+	$(MAKE) -C renderer
 
-test:
+test: math generic renderer
 	$(MAKE) -C tests
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
-
-$(ENGINE_LIB): $(OBJ)
-	@mkdir -p $(LIB_DIR)
-	$(AR) rcs $@ $^
-
-$(OBJ_DIR)/%.o: src/%.c $(HEADERS)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(MAKE) -C math clean
+	$(MAKE) -C generic clean
+	$(MAKE) -C renderer clean
+	$(MAKE) -C tests clean

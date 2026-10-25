@@ -1,22 +1,33 @@
 include ../config.mk
 
-OBJ_DIR=$(BASE_OBJ_DIR)/examples
-BIN_DIR=$(BASE_BIN_DIR)/examples
+EXAMPLES_OBJ_DIR=$(OBJ_DIR)/examples
+EXAMPLES_BIN_DIR=$(BIN_DIR)/examples
+
+MATH_LIB=$(LIB_DIR)/libmath.a
+GENERIC_LIB=$(LIB_DIR)/libgeneric.a
+RENDERER_LIB=$(LIB_DIR)/librenderer.a
+
+CFLAGS += -I../engine/math/include -I../engine/generic/include -I../engine/renderer/include
 
 SRC=$(wildcard *.c)
-BIN=$(patsubst %.c,$(BIN_DIR)/%,$(SRC))
-HEADERS=$(wildcard ../engine/include/*/*.h)
+BIN=$(patsubst %.c,$(EXAMPLES_BIN_DIR)/%,$(SRC))
 
 .PHONY: all clean
 
 all: $(BIN)
 
-$(ENGINE_LIB):
-	$(MAKE) -C ../engine
-
-$(BIN_DIR)/%: %.c $(ENGINE_LIB) $(HEADERS)
-	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) $< $(ENGINE_LIB) -o $@
+$(EXAMPLES_BIN_DIR)/%: %.c $(RENDERER_LIB) $(MATH_LIB) $(GENERIC_LIB)
+	@mkdir -p $(EXAMPLES_BIN_DIR)
+	$(CC) $(CFLAGS) $< $(RENDERER_LIB) $(MATH_LIB) $(GENERIC_LIB) -o $@
 
 clean:
 	rm -rf $(BIN_DIR)
+
+$(RENDERER_LIB):
+	$(MAKE) -C ../engine renderer
+
+$(MATH_LIB):
+	$(MAKE) -C ../engine math
+
+$(GENERIC_LIB):
+	$(MAKE) -C ../engine generic
