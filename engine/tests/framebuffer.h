@@ -4,7 +4,7 @@
 #include "test.h"
 
 #include "math/math.h"
-#include "rasterizer/framebuffer.h"
+#include "renderer/framebuffer.h"
 
 ADD_TEST("framebuffer", clear_colour, {
   Framebuffer fb = framebuffer_init(1, 1);

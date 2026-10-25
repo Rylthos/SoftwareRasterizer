@@ -1,6 +1,7 @@
-#include "rasterizer/mesh.h"
-#include "rasterizer/triangle2D.h"
-#include "rasterizer/vertex2D.h"
+#include "renderer/mesh.h"
+
+#include "renderer/triangle2D.h"
+#include "renderer/vertex2D.h"
 
 #include "assert.h"
 

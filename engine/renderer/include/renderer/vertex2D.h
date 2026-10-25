@@ -1,5 +1,5 @@
-#ifndef RASTERIZER_VERTEX_H
-#define RASTERIZER_VERTEX_H
+#ifndef RENDERER_VERTEX_H
+#define RENDERER_VERTEX_H
 
 #include "math/vec2.h"
 

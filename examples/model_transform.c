@@ -1,7 +1,7 @@
-#include "rasterizer/engine.h"
-#include "rasterizer/framebuffer.h"
-#include "rasterizer/mesh.h"
-#include "rasterizer/shader.h"
+#include "renderer/engine.h"
+#include "renderer/framebuffer.h"
+#include "renderer/mesh.h"
+#include "renderer/shader.h"
 
 #include "math/math.h"
 #include <stdint.h>

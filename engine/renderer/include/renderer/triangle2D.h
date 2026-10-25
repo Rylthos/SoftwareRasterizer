@@ -1,10 +1,10 @@
-#ifndef RASTERIZER_TRIANGLE2D_H
-#define RASTERIZER_TRIANGLE2D_H
+#ifndef RENDERER_TRIANGLE2D_H
+#define RENDERER_TRIANGLE2D_H
 
 #include "math/vec2.h"
 #include "math/vec3.h"
 
-#include "rasterizer/vertex2D.h"
+#include "renderer/vertex2D.h"
 
 typedef struct {
   Vertex2D p1;

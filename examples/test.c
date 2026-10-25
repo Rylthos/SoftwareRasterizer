@@ -1,10 +1,9 @@
 #include "math/math.h"
 
-#include "rasterizer/mesh.h"
-#include "rasterizer/vertex2D.h"
-
-#include "rasterizer/engine.h"
-#include "rasterizer/framebuffer.h"
+#include "renderer/engine.h"
+#include "renderer/framebuffer.h"
+#include "renderer/mesh.h"
+#include "renderer/vertex2D.h"
 
 int main(void) {
   Framebuffer framebuffer = framebuffer_init(640, 480);

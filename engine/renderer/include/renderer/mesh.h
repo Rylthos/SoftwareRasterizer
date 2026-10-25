@@ -1,11 +1,11 @@
-#ifndef RASTERIZER_MESH_H
-#define RASTERIZER_MESH_H
+#ifndef RENDERER_MESH_H
+#define RENDERER_MESH_H
 
 #include "generic/array.h"
-#include "rasterizer/triangle2D.h"
-#include "rasterizer/vertex2D.h"
 
-#include "rasterizer/shader.h"
+#include "renderer/shader.h"
+#include "renderer/triangle2D.h"
+#include "renderer/vertex2D.h"
 
 #include <stdio.h>
 

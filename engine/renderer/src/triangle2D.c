@@ -1,6 +1,6 @@
-#include "rasterizer/triangle2D.h"
+#include "renderer/triangle2D.h"
 
-#include "rasterizer/vertex2D.h"
+#include "renderer/vertex2D.h"
 
 #include "stdio.h"
 

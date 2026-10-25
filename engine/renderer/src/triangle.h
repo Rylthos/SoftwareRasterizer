@@ -1,5 +1,5 @@
-#ifndef RASTERIZER_TRIANGLE_H
-#define RASTERIZER_TRIANGLE_H
+#ifndef RENDERER_TRIANGLE_H
+#define RENDERER_TRIANGLE_H
 
 #include "math/vec2.h"
 #include "math/vec4.h"

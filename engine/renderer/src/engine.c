@@ -1,10 +1,10 @@
-#include "rasterizer/engine.h"
+#include "renderer/engine.h"
 
-#include "rasterizer/mesh.h"
+#include "renderer/mesh.h"
 
 #include "p_framebuffer.h"
-#include "rasterizer/shader.h"
-#include "rasterizer/vertex2D.h"
+#include "renderer/shader.h"
+#include "renderer/vertex2D.h"
 
 #include "triangle.h"
 

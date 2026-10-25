@@ -1,5 +1,5 @@
-#ifndef RASTERIZER_SHADER_H
-#define RASTERIZER_SHADER_H
+#ifndef RENDERER_SHADER_H
+#define RENDERER_SHADER_H
 
 #include "math/vec3.h"
 #include "math/vec4.h"

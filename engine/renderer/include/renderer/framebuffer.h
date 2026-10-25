@@ -1,10 +1,10 @@
-#ifndef FRAMEBUFFER_H
-#define FRAMEBUFFER_H
+#ifndef RENDERER_FRAMEBUFFER_H
+#define RENDERER_FRAMEBUFFER_H
 
 #include "math/u8vec3.h"
 #include <stdint.h>
 
-#include "rasterizer/triangle2D.h"
+#include "renderer/triangle2D.h"
 
 typedef struct T_Framebuffer {
   uint32_t width;

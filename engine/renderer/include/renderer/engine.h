@@ -1,9 +1,9 @@
-#ifndef RASTERIZER_ENGINE_H
-#define RASTERIZER_ENGINE_H
+#ifndef RENDERER_ENGINE_H
+#define RENDERER_ENGINE_H
 
-#include "rasterizer/framebuffer.h"
-#include "rasterizer/mesh.h"
-#include "rasterizer/shader.h"
+#include "renderer/framebuffer.h"
+#include "renderer/mesh.h"
+#include "renderer/shader.h"
 
 typedef enum { CullMode_None, CullMode_CW, CullMode_CCW } CullMode;
 
