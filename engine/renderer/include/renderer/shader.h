@@ -4,8 +4,11 @@
 #include "math/vec3.h"
 #include "math/vec4.h"
 
+#include "renderer/vertex.h"
+
 typedef struct {
-  Vec3 vertex_position;
+  VertexLayout layout;
+  uint8_t *data;
 } InputVertexShader;
 
 typedef struct {

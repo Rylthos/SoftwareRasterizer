@@ -66,8 +66,8 @@ U8Vec3 *framebuffer_get_pixel(const Framebuffer *framebuffer, int32_t x,
 }
 
 void framebuffer_clear_colour(const Framebuffer *framebuffer, U8Vec3 colour) {
-  for (uint32_t y = 0; y < framebuffer->height; y++) {
-    for (uint32_t x = 0; x < framebuffer->width; x++) {
+  for (int32_t y = 0; y < framebuffer->height; y++) {
+    for (int32_t x = 0; x < framebuffer->width; x++) {
       *framebuffer_get_pixel(framebuffer, x, y) = colour;
     }
   }

@@ -4,6 +4,8 @@
 #include "math/vec2.h"
 #include "math/vec4.h"
 
+#include <stdlib.h>
+
 typedef struct {
   Vec4 pos;
 } Vertex;
@@ -13,6 +15,12 @@ typedef struct {
   Vertex p2;
   Vertex p3;
 } Triangle;
+
+typedef struct {
+  size_t i1;
+  size_t i2;
+  size_t i3;
+} TriangleIndices;
 
 typedef struct {
   Vec2 x;

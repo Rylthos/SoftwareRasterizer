@@ -4,8 +4,6 @@
 #include "math/u8vec3.h"
 #include <stdint.h>
 
-#include "renderer/triangle2D.h"
-
 typedef struct T_Framebuffer {
   int32_t width;
   int32_t height;
