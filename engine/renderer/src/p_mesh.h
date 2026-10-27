@@ -3,7 +3,7 @@
 
 #include "renderer/mesh.h"
 
-#include "triangle.h"
+#include "p_triangle.h"
 
 TriangleIndices mesh_get_triangle(Mesh *mesh, size_t starting_index);
 

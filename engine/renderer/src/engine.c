@@ -6,15 +6,15 @@
 #include "p_framebuffer.h"
 #include "renderer/shader.h"
 
+#include "p_triangle.h"
 #include "renderer/uniform.h"
-#include "triangle.h"
 
 #include "stdbool.h"
 
 #include "assert.h"
 
 #include "math/math.h"
-#include "uniform.h"
+#include "p_uniform.h"
 
 void framebuffer_triangle(DrawCommand *cmd, const Triangle *triangle) {
   BoundingBox2D triangle_bounds = triangle_bounding_box(triangle);

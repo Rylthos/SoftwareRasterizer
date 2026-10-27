@@ -1,4 +1,4 @@
-#include "triangle.h"
+#include "p_triangle.h"
 
 #include "float.h"
 
