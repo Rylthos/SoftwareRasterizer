@@ -4,10 +4,14 @@
 #include "math/vec2.h"
 #include "math/vec4.h"
 
+#include "generic/array.h"
+#include "renderer/uniform.h"
+
 #include <stdlib.h>
 
 typedef struct {
   Vec4 pos;
+  ARRAY(ShaderUniform) uniforms;
 } Vertex;
 
 typedef struct {
@@ -27,10 +31,10 @@ typedef struct {
   Vec2 y;
 } BoundingBox2D;
 
-BoundingBox2D triangle_bounding_box(Triangle t);
+BoundingBox2D triangle_bounding_box(const Triangle *t);
 
-bool point_within_triangle(Triangle t, Vec2 p);
+Vec3 triangle_barycentre(const Triangle *t, Vec2 point);
 
-// Vec2 triangle2D_interpolate_uv(Triangle t, Vec2 p);
+bool point_within_triangle(const Triangle *t, Vec2 p);
 
 #endif

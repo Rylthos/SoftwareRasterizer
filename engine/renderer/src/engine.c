@@ -6,6 +6,7 @@
 #include "p_framebuffer.h"
 #include "renderer/shader.h"
 
+#include "renderer/uniform.h"
 #include "triangle.h"
 
 #include "stdbool.h"
@@ -13,19 +14,9 @@
 #include "assert.h"
 
 #include "math/math.h"
+#include "uniform.h"
 
-// void base_vertex_shader(InputVertexShader args, OutputVertexShader *output) {
-//   output->vertex_position =
-//       vec4_new(args.vertex_position.x, args.vertex_position.y,
-//                args.vertex_position.z, 1.f);
-// }
-//
-// void base_fragment_shader(InputFragmentShader args,
-//                           OutputFragmentShader *output) {
-//   output->colour = vec3_new(1.f, 1.f, 1.f);
-// }
-
-void framebuffer_triangle(DrawCommand *cmd, Triangle triangle) {
+void framebuffer_triangle(DrawCommand *cmd, const Triangle *triangle) {
   BoundingBox2D triangle_bounds = triangle_bounding_box(triangle);
 
   int32_t x_min = triangle_bounds.x.raw[0] * cmd->fb->width;
@@ -44,9 +35,23 @@ void framebuffer_triangle(DrawCommand *cmd, Triangle triangle) {
       if (!point_within_triangle(triangle, point))
         continue;
 
+      ARRAY(ShaderUniform) interpolated_uniforms = ARRAY_CREATE(ShaderUniform);
+
+      Vec3 scalars = triangle_barycentre(triangle, point);
+
+      for (size_t i = 0; i < ARRAY_LEN(triangle->p1.uniforms); i++) {
+        interpolated_uniforms[i] = interpolate_uniform(
+            scalars, &triangle->p1.uniforms[i], &triangle->p2.uniforms[i],
+            &triangle->p3.uniforms[i]);
+      }
+
       InputFragmentShader fs = {
           .fragment_position = vec3_from_vec2(point, 0.f),
+          .uniforms = interpolated_uniforms,
       };
+
+      ARRAY_FREE(interpolated_uniforms);
+
       OutputFragmentShader frag;
       cmd->fragment_shader(fs, &frag);
 
@@ -55,9 +60,24 @@ void framebuffer_triangle(DrawCommand *cmd, Triangle triangle) {
   }
 }
 
+void verify_uniform_types(ARRAY(ShaderUniform) p1, ARRAY(ShaderUniform) p2,
+                          ARRAY(ShaderUniform) p3) {
+  assert(ARRAY_LEN(p1) == ARRAY_LEN(p2) && ARRAY_LEN(p1) == ARRAY_LEN(p3) &&
+         "Uniforms are expected to be the same size");
+
+  for (uint32_t i = 0; i < ARRAY_LEN(p1); i++) {
+    assert(p1[i].type == p2[i].type && p1[i].type == p3[i].type &&
+           "Uniform types expected to be equal");
+  }
+}
+
 Triangle run_vertex_shader(DrawCommand *cmd, TriangleIndices indices) {
   InputVertexShader vs;
   OutputVertexShader vertices[3];
+
+  for (int i = 0; i < 3; i++) {
+    vertices[i].uniforms = ARRAY_CREATE(ShaderUniform);
+  }
 
   vs.layout = cmd->mesh.layout;
 
@@ -71,9 +91,12 @@ Triangle run_vertex_shader(DrawCommand *cmd, TriangleIndices indices) {
   cmd->vertex_shader(vs, &vertices[2]);
 
   return (Triangle){
-      .p1 = (Vertex){.pos = vertices[0].vertex_position},
-      .p2 = (Vertex){.pos = vertices[1].vertex_position},
-      .p3 = (Vertex){.pos = vertices[2].vertex_position},
+      .p1 = (Vertex){.pos = vertices[0].vertex_position,
+                     .uniforms = vertices[0].uniforms},
+      .p2 = (Vertex){.pos = vertices[1].vertex_position,
+                     .uniforms = vertices[1].uniforms},
+      .p3 = (Vertex){.pos = vertices[2].vertex_position,
+                     .uniforms = vertices[2].uniforms},
   };
 }
 
@@ -91,6 +114,7 @@ void draw_triangle(DrawCommand *cmd, TriangleIndices indices) {
     if (!triangle_cw)
       return;
     break;
+
   case CullMode_CCW:
     if (triangle_cw)
       return;
@@ -111,7 +135,14 @@ void draw_triangle(DrawCommand *cmd, TriangleIndices indices) {
     triangle.p1 = t;
   }
 
-  framebuffer_triangle(cmd, triangle);
+  verify_uniform_types(triangle.p1.uniforms, triangle.p2.uniforms,
+                       triangle.p3.uniforms);
+
+  framebuffer_triangle(cmd, &triangle);
+
+  ARRAY_FREE(triangle.p1.uniforms);
+  ARRAY_FREE(triangle.p2.uniforms);
+  ARRAY_FREE(triangle.p3.uniforms);
 }
 
 void draw(DrawCommand cmd) {

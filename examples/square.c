@@ -7,9 +7,9 @@
 #include "renderer/shader.h"
 
 #include "math/math.h"
+#include "renderer/uniform.h"
 #include "renderer/vertex.h"
 
-#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -17,15 +17,16 @@ void vertex_shader(InputVertexShader input, OutputVertexShader *output) {
   float *data = (float *)input.data;
   output->vertex_position = vec4_new(data[0], data[1], 0.f, 0.f);
 
-  // output->vertex_position = vec4_from_vec3(
-  //     vec3_scalar(vec3_add(input.vertex_position, vec3_new_scalar(-0.2f)),
-  //                 1.0 / 0.6),
-  //     1.f);
-  // output->vertex_position = vec4_from_vec3(input.vertex_position, 1.f);
+  ShaderUniform colour = {
+      .type = U_VEC3,
+      .vec3 = vec3_new(data[2], data[3], data[4]),
+  };
+
+  ARRAY_PUSH(output->uniforms, colour);
 }
 
 void fragment_shader(InputFragmentShader input, OutputFragmentShader *output) {
-  output->colour = input.fragment_position;
+  output->colour = input.uniforms[0].vec3;
 }
 
 int main(void) {
