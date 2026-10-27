@@ -20,10 +20,10 @@ generic:
 renderer:
 	$(MAKE) -C engine renderer BUILD=$(BUILD)
 
-test:
+test: math generic renderer
 	$(MAKE) -C engine test BUILD=$(BUILD)
 
-examples:
+examples: renderer
 	$(MAKE) -C examples BUILD=$(BUILD)
 
 clean:
